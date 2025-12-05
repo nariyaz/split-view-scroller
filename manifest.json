@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Split View Scroller",
+  "version": "1.0.1",
+  "description": "Synchronize scrolling across tabs in split view with customizable sync modes.",
+  "permissions": ["tabs", "scripting", "storage"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; default-src 'self'"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Split View Scroller Settings",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*", "file:///*"],
+      "exclude_matches": ["*://*.google.com/*", "*://*.example.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}
